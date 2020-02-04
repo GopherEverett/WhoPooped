@@ -11,6 +11,13 @@ dogRouter.get('/', (req, res) => {
         })
 })
 
+dogRouter.get('/byOwner/:ownerId', (req, res) => {
+    dogApi.getAllDogsByOwnerId(req.params.ownerId)
+    .then((dogs) => {
+        res.json(dogs)
+    })
+})
+
 dogRouter.get('/:dogId', (req, res) => {
     dogApi.getSingleDog(req.params.dogId)
         .then((dog) => {

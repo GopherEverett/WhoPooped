@@ -9,6 +9,10 @@ const Dog = new mongoose.Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
+    },
+    latestpoop: {
+        type: Date,
+        default: Date.now
     }
 })
 
@@ -18,8 +22,12 @@ function getAllDogs() {
     return DogCollection.find().populate('owner').exec()
 }
 
+function getAllDogsByOwnerId(ownerId) {
+    return DogCollection.find({owner: ownerId})
+}
+
 function getSingleDog(dogId) {
-    return DogCollection.findById(dogId)
+    return DogCollection.findById(dogId).populate('owner').exec()
 }
 
 function addNewDog(dog) {
@@ -32,4 +40,4 @@ function updateDog(dogId, updatedDog) {
 function deleteDog(dogId) {
     return DogCollection.findByIdAndDelete(dogId)
 }
-module.exports = { deleteDog, updateDog, addNewDog, getSingleDog, getAllDogs }
+module.exports = { deleteDog, updateDog, addNewDog, getSingleDog, getAllDogs, getAllDogsByOwnerId }

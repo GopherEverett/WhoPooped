@@ -3,17 +3,21 @@ const mongoose = require('./connection')
 const User = new mongoose.Schema({
     name: String,
     location: String,
-    image: String
+    image: String,
+    // dogs: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Dog"
+    // }],
 })
 
 const UserCollection = mongoose.model('User', User)
 
 function getAllUsers() {
-    return UserCollection.find()
+    return UserCollection.find().populate('dogs').exec()
 }
 
 function getSingleUser(userId) {
-    return UserCollection.findById(userId)
+    return UserCollection.findById(userId).populate('dogs').exec()
 }
 
 function addNewUser(user) {
