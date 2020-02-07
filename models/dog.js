@@ -10,10 +10,11 @@ const Dog = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    latestpoop: {
-        type: Date,
-        default: Date.now
-    }
+    // latestpoop: {
+    //     type: Date,
+    //     default: Date.now
+    // }
+    latestpoop: Date
 })
 
 const DogCollection = mongoose.model('Dog', Dog)
@@ -23,7 +24,7 @@ function getAllDogs() {
 }
 
 function getAllDogsByOwnerId(ownerId) {
-    return DogCollection.find({owner: ownerId})
+    return DogCollection.find({owner: ownerId}).populate('owner').exec()
 }
 
 function getSingleDog(dogId) {
