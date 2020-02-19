@@ -10,10 +10,6 @@ const Dog = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    // latestpoop: {
-    //     type: Date,
-    //     default: Date.now
-    // }
     latestpoop: Date
 })
 
