@@ -10,6 +10,7 @@ const PoopButton = (props) => {
         }).then(res => {
             console.log(res.data)
         })
+        
     }
     return (
         <div className="buttonCon">
