@@ -1,20 +1,11 @@
-import React, {  } from 'react';
-import Axios from 'axios';
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
+
 
 const PoopButton = (props) => {
-
-    const handlePoop = () => {
-        const date = Date.now()
-        Axios.put(`/api/dog/${props.dog._id}`, {
-            latestpoop: date
-        }).then(res => {
-            console.log(res.data)
-        })
-        
-    }
     return (
         <div className="buttonCon">
-            <div className="poopbutton" onClick={handlePoop}><span className="poopEmoji" role="img" aria-label="poop">💩</span></div>
+            <Button variant="info" className="poopbutton" onClick={() => props.handlePoop(props.dog._id, props.idx)}><span className="poopEmoji" role="img" aria-label="poop">💩</span></Button>
         </div>
     );
 }

@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.dogCards {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3.5rem;
+}
+
 .poopbutton{
 	display:block;
 	border-style:solid;
