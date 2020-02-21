@@ -10,26 +10,30 @@ export default function Owner(props) {
 
     const handlePoop = (dogId, idx, dog) => {
         swal({
-            text: "YAY!",
             buttons: true,
+            icon: "warning",
             content: (
                 <div>
-                    <h1>Did {dog.name} really poop?</h1>
+                    <h2>YAY!</h2>
+                    <h2>Did {dog.name} really poop?</h2>
                 </div>
             )
         }).then((value) => {
             if (value) {
-            const date = Date.now()
-            Axios.put(`/api/dog/${dogId}`, {
-                latestpoop: date
-            }).then((res) => {
-                const updatedDogs = dogs.map((dog, index) => {
-                    if (index !== idx) return dog
-                    return res.data
+                const date = Date.now()
+                Axios.put(`/api/dog/${dogId}`, {
+                    latestpoop: date
+                }).then((res) => {
+                    const updatedDogs = dogs.map((dog, index) => {
+                        if (index !== idx) return dog
+                        return res.data
+                    })
+                    setDogs(updatedDogs)
+                    swal("Poop updated!", {
+                        icon: "success",
+                    });
                 })
-                setDogs(updatedDogs)
-            })
-        }
+            }
         })
     }
 
