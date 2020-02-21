@@ -3,20 +3,33 @@ import Axios from 'axios';
 import Moment from 'react-moment';
 import PoopButton from './PoopButton';
 import { Card } from 'react-bootstrap'
+import swal from '@sweetalert/with-react'
 
 export default function Owner(props) {
     const [dogs, setDogs] = useState([])
 
-    const handlePoop = (dogId, idx) => {
-        const date = Date.now()
-        Axios.put(`/api/dog/${dogId}`, {
-            latestpoop: date
-        }).then((res) => {
-            const updatedDogs = dogs.map((dog, index) => {
-                if (index !== idx) return dog
-                return res.data
+    const handlePoop = (dogId, idx, dog) => {
+        swal({
+            text: "YAY!",
+            buttons: true,
+            content: (
+                <div>
+                    <h1>Did {dog.name} really poop?</h1>
+                </div>
+            )
+        }).then((value) => {
+            if (value) {
+            const date = Date.now()
+            Axios.put(`/api/dog/${dogId}`, {
+                latestpoop: date
+            }).then((res) => {
+                const updatedDogs = dogs.map((dog, index) => {
+                    if (index !== idx) return dog
+                    return res.data
+                })
+                setDogs(updatedDogs)
             })
-            setDogs(updatedDogs)
+        }
         })
     }
 
