@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Moment from 'react-moment';
 import PoopButton from './PoopButton';
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import swal from '@sweetalert/with-react'
 
 export default function Owner(props) {
@@ -46,7 +46,6 @@ export default function Owner(props) {
     }, [props.match.params.ownerId])
     return (
         <div>
-            {/* <h1> Dogs:</h1> */}
             <div className="dogCards">
                 {dogs.map((dog, idx) => (
                     <Card key={dog._id} style={{ width: '18rem' }}>
@@ -59,6 +58,7 @@ export default function Owner(props) {
                     </Card>
                 ))}
             </div>
+            <Button variant="primary" href={`/${props.match.params.ownerId}/newDog`}>Add Dog</Button>
         </div>
     )
 }

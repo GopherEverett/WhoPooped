@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 
 export default function Owners() {
     const [owners, setOwners] = useState([]);
@@ -17,7 +17,7 @@ export default function Owners() {
         <div>
             <h1>Owners:</h1>
             {owners.map(owner => (
-                <div className="ownerCard">
+                <div className="ownerCard" key={owner._id}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={owner.image} />
                         <Link to={{
@@ -25,11 +25,12 @@ export default function Owners() {
                             owner: {
                                 name: owner.name
                             }
-                        }} key={owner._id}><h2>{owner.name}</h2></Link>
+                        }} ><h2>{owner.name}</h2></Link>
                         <Card.Text>Location: {owner.location}</Card.Text>
                     </Card>
                 </div>
             ))}
+            <Button variant="secondary" href="/newOwner">Add Owner</Button>
         </div>
     )
 }
