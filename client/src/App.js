@@ -12,7 +12,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar bg="dark" variant="dark" className="justify-content-between">
+        <Navbar bg="light" variant="light
+        " className="justify-content-between">
           <Navbar.Brand>Who Pooped?</Navbar.Brand>
           <Nav className="mr-sm-2">
             <Nav.Link href="/">Owners</Nav.Link>

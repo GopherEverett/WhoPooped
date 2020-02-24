@@ -15,22 +15,35 @@ export default function Owners() {
     }, [])
     return (
         <div>
+            <br />
             <h1>Owners:</h1>
-            {owners.map(owner => (
-                <div className="ownerCard" key={owner._id}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={owner.image} />
-                        <Link to={{
-                            pathname: `/${owner._id}`,
-                            owner: {
-                                name: owner.name
-                            }
-                        }} ><h2>{owner.name}</h2></Link>
-                        <Card.Text>Location: {owner.location}</Card.Text>
+            <div className="ownerCard" >
+                {owners.map(owner => (
+                    <Card className="bg-dark text-white " style={{ width: '18rem' }} key={owner._id}>
+                        <Card.Img src={owner.image} alt="Owner image" />
+                        <Card.ImgOverlay className="d-flex  flex-column justify-content-end">
+                            <Card.Title ><Link to={{
+                                pathname: `/${owner._id}`,
+                                owner: {
+                                    name: owner.name
+                                }
+                            }} >
+                                <h2>
+                                    {owner.name}
+                                </h2>
+                            </Link>
+                            </Card.Title>
+                            <Card.Text >
+                                <h3>
+                                    {owner.location}
+                                </h3>
+                            </Card.Text >
+                        </Card.ImgOverlay>
                     </Card>
-                </div>
-            ))}
-            <Button variant="secondary" href="/newOwner">Add Owner</Button>
+                ))}
+            </div>
+            <br />
+            <Button variant="primary" href="/newOwner">Add Owner</Button>
         </div>
     )
 }

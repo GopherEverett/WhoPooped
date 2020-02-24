@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 function NewOwnerForm(props) {
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
     const [image, setImage] = useState('')
+    const [toHome, setToHome] = useState(false)
+
 
 const createOwner = async (e) => {
         e.preventDefault()
@@ -15,7 +18,7 @@ const createOwner = async (e) => {
                 location: location,
                 image: image
             });
-
+            setTimeout(()=> setToHome(true), 2000)
         }
         catch (err) {
             console.log(err)
@@ -24,6 +27,7 @@ const createOwner = async (e) => {
 
     return (
         <div>
+            {toHome ? <Redirect to={`/`} /> : null}
             <Form onSubmit={createOwner}>
                 <Form.Group controlId="formGroupName">
                     <Form.Label>Name</Form.Label>

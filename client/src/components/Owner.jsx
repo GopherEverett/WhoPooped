@@ -48,16 +48,20 @@ export default function Owner(props) {
         <div>
             <div className="dogCards">
                 {dogs.map((dog, idx) => (
-                    <Card key={dog._id} style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={dog.image} />
-                        <h1>{dog.name}</h1>
-                        <h2>{dog.breed}</h2>
-                        <h3>Last Poop:</h3>
-                        <Moment fromNow>{dog.latestpoop}</Moment>
-                        <PoopButton dog={dog} idx={idx} handlePoop={handlePoop} />
+                    <Card className="bg-dark text-white " key={dog._id} style={{ width: '20rem', marginBottom: '10px' }}>
+                        <Card.Img src={dog.image} alt="Dog image" />
+                        <Card.ImgOverlay className="d-flex  flex-column justify-content-end">
+                            <Card.Title ><h1>{dog.name}</h1></Card.Title>
+                            <Card.Text >
+                                Last poop:
+                            </Card.Text >
+                                <Moment fromNow>{dog.latestpoop}</Moment>
+                            <PoopButton  dog={dog} idx={idx} handlePoop={handlePoop} />
+                        </Card.ImgOverlay>
                     </Card>
                 ))}
             </div>
+            <br/>
             <Button variant="primary" href={`/${props.match.params.ownerId}/newDog`}>Add Dog</Button>
         </div>
     )

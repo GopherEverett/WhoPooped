@@ -7,7 +7,7 @@ const PoopButton = (props) => {
     return (
         <div className="buttonCon">
             <Button
-                variant="info"
+                variant="success"
                 className="poopbutton"
                 onClick={() => {
                     props.handlePoop(props.dog._id, props.idx, props.dog)

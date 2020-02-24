@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -7,6 +8,7 @@ function NewDogForm(props) {
     const [breed, setBreed] = useState('')
     const [age, setAge] = useState('')
     const [image, setImage] = useState('')
+    const [toHome, setToHome] = useState(false)
 
 const createDog = async (e) => {
         e.preventDefault()
@@ -18,7 +20,7 @@ const createDog = async (e) => {
                 image: image,
                 owner: props.match.params.ownerId
             });
-            
+            setTimeout(()=> setToHome(true), 2000)
         }
         catch (err) {
             console.log(err)
@@ -26,7 +28,9 @@ const createDog = async (e) => {
     }
 
     return (
+
         <div>
+        {toHome ? <Redirect to={`/${props.match.params.ownerId}`} /> : null}
             <Form onSubmit={createDog}>
                 <Form.Group controlId="formGroupName">
                     <Form.Label>Name</Form.Label>
