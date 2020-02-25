@@ -17,12 +17,14 @@ export default function Owner(props) {
                     <h2>Delete {dog.name}?</h2>
                 </div>
             )
-        }).then(()=> {
-            Axios.delete(`/api/dog/${dogId}`).then(() => {
-                swal(`${dog.name} deleted`, {
-                    icon: "success",
-                });
-            })
+        }).then((value) => {
+            if (value) {
+                Axios.delete(`/api/dog/${dogId}`).then(() => {
+                    swal(`${dog.name} deleted`, {
+                        icon: "success",
+                    });
+                })
+            }
         })
 
     }
@@ -75,17 +77,17 @@ export default function Owner(props) {
                             <Card.Text >
                                 Last poop:
                             </Card.Text >
-                                <Moment fromNow>{dog.latestpoop}</Moment>
-                            <PoopButton  dog={dog} idx={idx} handlePoop={handlePoop} />
-                            <br/>
+                            <Moment fromNow>{dog.latestpoop}</Moment>
+                            <PoopButton dog={dog} idx={idx} handlePoop={handlePoop} />
+                            <br />
                             <Button variant="danger" onClick={() =>
                                 handleDelete(dog._id, dog)
-                                }>Delete</Button>
+                            }>Delete</Button>
                         </Card.ImgOverlay>
                     </Card>
                 ))}
             </div>
-            <br/>
+            <br />
             <Button variant="primary" href={`/${props.match.params.ownerId}/newDog`}>Add Dog</Button>
         </div>
     )
