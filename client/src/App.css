@@ -19,6 +19,9 @@ body {
   margin-top: 3.5rem;
   font-size: 2rem;
 }
+.dogCards h1 {
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 600px) {
   .dogCards {

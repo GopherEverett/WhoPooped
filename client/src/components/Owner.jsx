@@ -8,6 +8,25 @@ import swal from '@sweetalert/with-react'
 export default function Owner(props) {
     const [dogs, setDogs] = useState([])
 
+    const handleDelete = (dogId, dog) => {
+        swal({
+            buttons: true,
+            icon: "warning",
+            content: (
+                <div>
+                    <h2>Delete {dog.name}?</h2>
+                </div>
+            )
+        }).then(()=> {
+            Axios.delete(`/api/dog/${dogId}`).then(() => {
+                swal(`${dog.name} deleted`, {
+                    icon: "success",
+                });
+            })
+        })
+
+    }
+
     const handlePoop = (dogId, idx, dog) => {
         swal({
             buttons: true,
@@ -48,15 +67,20 @@ export default function Owner(props) {
         <div>
             <div className="dogCards">
                 {dogs.map((dog, idx) => (
-                    <Card className="bg-dark text-white " key={dog._id} style={{ width: '20rem', marginBottom: '10px' }}>
+                    <Card className="bg-dark text-white " key={dog._id} style={{ width: '23rem', marginBottom: '10px' }}>
                         <Card.Img src={dog.image} alt="Dog image" />
                         <Card.ImgOverlay className="d-flex  flex-column justify-content-end">
                             <Card.Title ><h1>{dog.name}</h1></Card.Title>
+                            <Card.Text>{dog.breed}</Card.Text>
                             <Card.Text >
                                 Last poop:
                             </Card.Text >
                                 <Moment fromNow>{dog.latestpoop}</Moment>
                             <PoopButton  dog={dog} idx={idx} handlePoop={handlePoop} />
+                            <br/>
+                            <Button variant="danger" onClick={() =>
+                                handleDelete(dog._id, dog)
+                                }>Delete</Button>
                         </Card.ImgOverlay>
                     </Card>
                 ))}
